@@ -8,12 +8,6 @@ const router = express.Router()
 router.post('/', (req, res, next) => {
   const {fullname, username, password} = req.body
 
-  const newUser = {
-    fullname,
-    username,
-    password
-  }
-
   return User.hashPassword(password)
     .then(digest => {
       const newUser = {

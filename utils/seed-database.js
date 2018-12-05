@@ -1,39 +1,45 @@
-'use strict';
+'use strict'
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const { MONGODB_URI } = require('../config');
+const {MONGODB_URI} = require('../config')
 
-const Note = require('../models/note');
-const Folder = require('../models/folder');
-const Tag = require('../models/tag');
+const Note = require('../models/note')
+const Folder = require('../models/folder')
+const Tag = require('../models/tag')
+const User = require('../models/user')
 
-const { folders, notes, tags } = require('../db/data');
+const {folders, notes, tags, users} = require('../db/data')
 
-console.log(`Connecting to mongodb at ${MONGODB_URI}`);
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
+console.log(`Connecting to mongodb at ${MONGODB_URI}`)
+mongoose
+  .connect(
+    MONGODB_URI,
+    {useNewUrlParser: true}
+  )
   .then(() => {
-    console.info('Delete Data');
+    console.info('Delete Data')
     return Promise.all([
       Note.deleteMany(),
       Folder.deleteMany(),
-      Tag.deleteMany(),
-    ]);
+      Tag.deleteMany()
+    ])
   })
   .then(() => {
-    console.info('Seeding Database');
+    console.info('Seeding Database')
     return Promise.all([
       Note.insertMany(notes),
       Folder.insertMany(folders),
-      Tag.insertMany(tags)
-    ]);
+      Tag.insertMany(tags),
+      User.insertMany(users)
+    ])
   })
   .then(results => {
-    console.log('Inserted', results);
-    console.info('Disconnecting');
-    return mongoose.disconnect();
+    console.log('Inserted', results)
+    console.info('Disconnecting')
+    return mongoose.disconnect()
   })
   .catch(err => {
-    console.error(err);
-    return mongoose.disconnect();
-  });
+    console.error(err)
+    return mongoose.disconnect()
+  })
