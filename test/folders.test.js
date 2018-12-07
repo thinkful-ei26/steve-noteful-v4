@@ -121,7 +121,7 @@ describe('Noteful API - Folders', function() {
     })
   })
 
-  describe.only('GET /api/folders/:id', function() {
+  describe('GET /api/folders/:id', function() {
     it('should return correct folder', function() {
       let data
       return Folder.findOne({userId: user._id})
@@ -193,7 +193,7 @@ describe('Noteful API - Folders', function() {
     })
   })
 
-  describe.only('POST /api/folders', function() {
+  describe('POST /api/folders', function() {
     it('should create and return a new item when provided valid data', function() {
       const newItem = {name: 'newFolder'}
       let body
@@ -287,7 +287,7 @@ describe('Noteful API - Folders', function() {
     })
   })
 
-  describe.only('PUT /api/folders/:id', function() {
+  describe('PUT /api/folders/:id', function() {
     it('should update the folder', function() {
       const updateItem = {name: 'Updated Name'}
       let data
@@ -430,7 +430,7 @@ describe('Noteful API - Folders', function() {
     })
   })
 
-  describe.only('DELETE /api/folders/:id', function() {
+  describe('DELETE /api/folders/:id', function() {
     it('should delete an existing folder and respond with 204', function() {
       let data
       return Folder.findOne({userId: user._id})
