@@ -96,13 +96,12 @@ router.post('/', (req, res, next) => {
       err.status = 400
       return next(err)
     }
-    if (!typeOf(tags) === 'array') {
+    if(!Array.isArray(tags)){
       const err = new Error('Tags must be an array')
       err.status = 400
       return next(err)
     }
   }
-
   const newNote = {title, content, folderId, tags, userId}
   if (newNote.folderId === '') {
     delete newNote.folderId

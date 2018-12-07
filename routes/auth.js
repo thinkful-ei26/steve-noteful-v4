@@ -1,5 +1,5 @@
 const express = require('express')
-const mongoose = require('mongoose')
+
 const passport = require('passport')
 const {JWT_SECRET, JWT_EXPIRY} = require('../config')
 const jwt = require('jsonwebtoken')

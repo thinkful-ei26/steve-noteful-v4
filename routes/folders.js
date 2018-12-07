@@ -17,7 +17,7 @@ router.use(
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/', (req, res, next) => {
   const userId = req.user.id
-  Folder.findOne(userId)
+  return Folder.find( {userId} )
     .sort('name')
     .then(results => {
       res.json(results)
