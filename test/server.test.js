@@ -5,10 +5,20 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const { JWT_EXPIRY, JWT_SECRET} = require('../config');
+const jwt = require('jsonwebtoken')
 
 const app = require('../server');
 
 const expect = chai.expect;
+
+function createAuthToken(user) {
+  user.id = user._id
+  return jwt.sign({user}, JWT_SECRET, {
+    subject: user.username,
+    expiresIn: JWT_EXPIRY
+  })
+}
 
 chai.use(chaiHttp);
 
@@ -60,3 +70,5 @@ describe('Basic Express setup', () => {
 
   });
 });
+
+module.exports = createAuthToken
